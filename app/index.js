@@ -27,14 +27,12 @@ module.exports = generator.Base.extend({
 			{
 				type: 'input',
 				name: 'authorname',
-				message: 'Your name?',
-				default: 'Jolane Synott'
+				message: 'Your name?'
 			},
 			{
 				type: 'input',
 				name: 'authoremail',
-				message: 'Your email?',
-				default: 'jolane.synott@cornwell.com.au'
+				message: 'Your email?'
 			},
 			{
 				type: 'input',
