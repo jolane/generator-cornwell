@@ -1,6 +1,5 @@
 markdown: kramdown
 url: <%= url %>
-staging_url: <%= staging_url %>
 baseurl:
 exclude: ['README.md', '.gitignore', 'package.json', 'node_modules', 'Gemfile.lock', 'Gemfile', '_assets', '_tests']
 permalink: pretty

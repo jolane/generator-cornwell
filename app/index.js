@@ -38,11 +38,6 @@ module.exports = generator.Base.extend({
 			},
 			{
 				type: 'input',
-				name: 'staging_url',
-				message: 'What is the staging URL? http://'
-			},
-			{
-				type: 'input',
 				name: 'url',
 				message: 'What is the finial URL? http://'
 			},
@@ -103,7 +98,6 @@ module.exports = generator.Base.extend({
 		this.fs.copy(sourceRoot + '/Gemfile', destRoot + '/Gemfile');
 		this.fs.copy(sourceRoot + '/index.html', destRoot + '/index.html');
 
-		this.fs.copyTpl(sourceRoot + '/.gitlab-ci.yml', destRoot + '/.gitlab-ci.yml', templateContext);
 		this.fs.copy(sourceRoot + '/.editorconfig', destRoot + '/.editorconfig');
 		this.fs.copy(sourceRoot + '/.babelrc', destRoot + '/.babelrc');
 		this.fs.copy(sourceRoot + '/.jshintrc', destRoot + '/.jshintrc');
