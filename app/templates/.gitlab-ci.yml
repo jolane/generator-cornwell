@@ -1,0 +1,60 @@
+image: dsferruzza/php-node-ruby-build
+
+cache:
+  paths:
+    - vendor/
+    - node_modules/
+
+before_script:
+  - npm install
+  - bundle install
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+lint:
+  stage: test
+  script:
+    - npm test
+
+build:
+  stage: build
+  script:
+    - npm run build
+    - bundle exec jekyll build
+  artifacts:
+    path:
+      - _site
+
+deploy_live:
+  stage: deploy
+  script:
+    - echo "Deploy via SSH to Digital Ocean Server"
+    - rsync -av --delete _site jolane@139.59.239.16:/var/www/<%= url %>/html
+  only:
+    - master
+
+review:
+  stage: review
+  script:
+    - rsync -av --delete public jolane@139.59.239.16:/srv/nginx/pages/$CI_BUILD_REF_SLUG
+  environment:
+    name: review/$CI_BUILD_REF_NAME
+    url: http://$CI_BUILD_REF_SLUG.$APPS_DOMAIN
+    on_stop: stop_review
+  only:
+    - branches
+  except:
+    - master
+
+stop_review:
+  stage: review
+  script:
+    - rsync -vr --delete $(mktemp -d)/ jolane@139.59.239.16:/srv/nginx/pages/$CI_BUILD_REF_SLUG
+  variables:
+    GIT_STRATEGY: none
+  when: manual
+  environment:
+    name: review/$CI_BUILD_REF_NAME
+    action: stop

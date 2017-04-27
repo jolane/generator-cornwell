@@ -1,0 +1,11 @@
+{
+    "dest": "./",
+    "mode": {
+        "symbol": {
+            "dest": "_includes",
+            "sprite": "svg.html",
+            "inline": true,
+            "example": false
+        }
+    }
+}
