@@ -109,7 +109,7 @@ module.exports = generator.Base.extend({
 		this.fs.copy(sourceRoot + '/.jshintrc', destRoot + '/.jshintrc');
 		this.fs.copy(sourceRoot + '/.jshintignore', destRoot + '/.jshintignore');
 		this.fs.copy(sourceRoot + '/.stylintrc', destRoot + '/.stylintrc');
-		this.fs.copy(sourceRoot + '/.gitignore', destRoot + '/.gitignore');
+		this.fs.copy(sourceRoot + '/gitignore', destRoot + '/.gitignore');
 
 		this.directory(sourceRoot + '/_assets', destRoot + '/_assets');
 		this.directory(sourceRoot + '/_config', destRoot + '/_config');
