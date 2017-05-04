@@ -102,9 +102,11 @@ module.exports = generator.Base.extend({
 		this.fs.copy(sourceRoot + '/.jshintignore', destRoot + '/.jshintignore');
 		this.fs.copy(sourceRoot + '/.stylintrc', destRoot + '/.stylintrc');
 		this.fs.copy(sourceRoot + '/gitignore', destRoot + '/.gitignore');
+		this.fs.copy(sourceRoot + '/webpack.config.js', destRoot + '/webpack.config.js');
+		this.fs.copy(sourceRoot + '/.gitlab-ci.yml', destRoot + '/.gitlab-ci.yml');
+		this.fs.copy(sourceRoot + '/svg-sprite.json', destRoot + '/svg-sprite.json');
 
 		this.directory(sourceRoot + '/_assets', destRoot + '/_assets');
-		this.directory(sourceRoot + '/_config', destRoot + '/_config');
 		this.directory(sourceRoot + '/_layouts', destRoot + '/_layouts');
 		this.directory(sourceRoot + '/_includes', destRoot + '/_includes');
 		this.directory(sourceRoot + '/_data', destRoot + '/_data');

@@ -1,0 +1,76 @@
+image: dsferruzza/php-node-ruby-build
+
+cache:
+  paths:
+    - vendor/
+    - node_modules/
+
+stages:
+  - test
+  - build
+  - review
+  - deploy
+
+lint:
+  stage: test
+  before_script:
+    - npm install
+  script:
+    - npm test
+
+build:
+  stage: build
+  before_script:
+    - npm install
+    - bundle install
+  script:
+    - npm run build
+    - bundle exec jekyll build --destination public
+  artifacts:
+    paths:
+      - public
+
+review:
+  stage: review
+  before_script:
+    - apt-get update -y && apt-get install rsync -y
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:
+    - rsync -av --delete public $SSH_USERNAME@$SSH_ADDRESS:/srv/nginx/pages/$CI_PROJECT_ID-$CI_COMMIT_REF_SLUG
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    url: http://$CI_PROJECT_ID-$CI_COMMIT_REF_SLUG.$APPS_DOMAIN
+    on_stop: stop_review
+  only:
+    - branches
+  except:
+    - master
+
+stop_review:
+  stage: review
+  before_script:
+    - apt-get update -y && apt-get install rsync -y
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:
+    - rsync -vr --delete $(mktemp -d)/ $SSH_USERNAME@$SSH_ADDRESS:/srv/nginx/pages/$CI_COMMIT_REF_SLUG
+  variables:
+    GIT_STRATEGY: none
+  when: manual
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    action: stop
+
+deploy_live:
+  stage: deploy
+  script:
+    - echo "Deploy via SSH to Digital Ocean Server"
+  only:
+    - master
