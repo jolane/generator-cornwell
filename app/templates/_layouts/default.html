@@ -33,16 +33,15 @@
 		<!-- End Google Tag Manager (noscript) -->
 		<% } %>
 
+{% include Header.html %}
 
 		<main>
 
-{% include header.html %}
-
 {{ content }}
 
-{% include footer.html %}
-
 		</main>
+
+{% include Footer.html %}
 
 		<script src="{{site.baseurl}}/assets/js/bundle.js?bust={{ site.time | date: '%s' }}"></script>
 		<% if (gacode != '') { %>

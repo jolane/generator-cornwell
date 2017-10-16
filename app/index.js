@@ -92,7 +92,6 @@ module.exports = generator.Base.extend({
 		this.fs.copyTpl(sourceRoot + '/package.json', destRoot + '/package.json', templateContext);
 		this.fs.copyTpl(sourceRoot + '/README.md', destRoot + '/README.md', templateContext);
 		this.fs.copyTpl(sourceRoot + '/_config.yml', destRoot + '/_config.yml', templateContext);
-		this.fs.copy(sourceRoot + '/composer.json', destRoot + '/composer.json');
 		this.fs.copy(sourceRoot + '/Gemfile', destRoot + '/Gemfile');
 		this.fs.copy(sourceRoot + '/index.html', destRoot + '/index.html');
 
@@ -115,6 +114,6 @@ module.exports = generator.Base.extend({
 	},
 	install: function() {
 		this.npmInstall();
-		this.spawnCommand('bundle', ['install', '--local']);
+		this.spawnCommand('bundle', ['install']);
 	}
 });

@@ -15,7 +15,7 @@
     "globalDupe": true,
     "groupOutputByFile": true,
     "indentPref": true,
-    "leadingZero": "never",
+    "leadingZero": "always",
     "maxErrors": 0,
     "maxWarnings": 50,
     "mixed": true,

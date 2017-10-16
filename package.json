@@ -1,6 +1,6 @@
 {
   "name": "generator-cornwell",
-  "version": "1.0.10",
+  "version": "1.0.18",
   "description": "A generator for creating a Cornwel website.",
   "main": "index.js",
   "scripts": {
