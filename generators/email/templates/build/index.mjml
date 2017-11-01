@@ -1,0 +1,20 @@
+<mjml>
+    <mj-head>
+    </mj-head>
+    <mj-body>
+        <mj-container>
+
+            <mj-section >
+                <mj-column>
+                    <mj-image padding="5px 0 0 0" alt="Test image" width="500"  src="images/test.png"   />
+                    <mj-text align="center">
+                        <h1>
+                       Cornwell EDM's
+                        </h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce varius nunc mauris, a tincidunt tellus molestie ac. Curabitur hendrerit, arcu sit amet gravida vestibulum, dui nulla pulvinar est, id mattis velit lacus eget tortor. Ut ut blandit erat. Proin non magna tellus. Proin vitae ipsum id leo pellentesque volutpat eget eu nunc. Fusce mollis a nunc in dictum. Maecenas vel volutpat ex, non tincidunt dui. Proin at neque nibh. Vivamus egestas faucibus ex eget dictum. Etiam at ex sed libero iaculis hendrerit non quis metus. Integer nisi tellus, elementum ac quam nec, suscipit maximus arcu. Nam iaculis ac nisl non tincidunt. Sed condimentum ornare eros ullamcorper suscipit. Sed tincidunt bibendum tellus, vitae rhoncus ipsum pellentesque a. Phasellus non ligula in tortor suscipit interdum et sed metus.</p>
+                    </mj-text>                    
+                </mj-column>
+            </mj-section>
+        </mj-container>
+    </mj-body>
+</mjml>

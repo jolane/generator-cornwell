@@ -1,0 +1,39 @@
+{
+    "name": "mjml-text",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    
+    "scripts": {
+        "preuploadImgs": "rm -rf dist && mkdir dist && mkdir dist/deploy && mkdir dist/deploy/images && cp build/images/*.* dist/deploy/images",
+        "uploadImgs": "node funcs/images.js",
+        "preupload": "npm run uploadImgs",
+        "upload": "node funcs/upload.js",
+        "prebuild": "npm run upload && mjml build/index.mjml  -o dist/deploy/index.html",
+        "build": "node funcs/build.js",
+        "premail": "npm run build",
+        "mail": "node funcs/send-mail.js",
+        "server": "browser-sync start --logLevel 'silent' --server 'dist/preview/' --files 'dist/preview/'",
+        "mjml": "mjml -w build/index.mjml  -o dist/preview/index.html",
+        "images": "chokidar 'build/images/*.*' -c 'cp images/*.* dist/preview/images'",
+        "prestart": "rm -rf dist && mkdir dist && mkdir dist/preview && mkdir dist/preview/images && cp build/images/*.* dist/preview/images",
+        "start": "npm-run-all --parallel mjml images server"
+    },
+    "keywords": [],
+    "author": "Jolane Synott <jolane@jolane.net>",
+    "license": "MIT",
+    "devDependencies": {
+        "broken-link-checker": "0.7.6",
+        "browser-sync": "2.18.13",
+        "chokidar-cli": "1.2.0",
+        "fs": "0.0.1-security",
+        "git-repo-info": "^1.4.1",
+        "git-repo-name": "^0.6.0",
+        "imagemin-cli": "3.0.0",
+        "nodemailer": "4.0.1",
+        "npm-run-all": "4.0.2",
+        "rename": "^1.0.4",
+        "s3": "^4.4.0",
+        "s3-cli": "0.13.0"
+    }
+}
