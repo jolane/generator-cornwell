@@ -42,7 +42,8 @@ module.exports = generator.Base.extend({
 			{
 				type: 'input',
 				name: 's3region',
-				message: 'What is the Cornwells s3 region?'
+				message: 'What is the Cornwells s3 region?',
+				default: 'ap-southeast-2'
 			}
 		]).then(function(answers) {
 			this.appname = answers.appname;
@@ -51,7 +52,7 @@ module.exports = generator.Base.extend({
 			this.s3accesskey = answers.s3accesskey;
 			this.s3secretAccessKey = answers.s3secretAccessKey;
 			this.s3region = answers.s3region;
-			
+
 		}.bind(this));
 	},
 	writing: function() {
@@ -70,11 +71,10 @@ module.exports = generator.Base.extend({
 		this.fs.copy(sourceRoot + '/common-emails.txt', destRoot + '/common-emails.txt');
 		this.fs.copyTpl(sourceRoot + '/package.json', destRoot + '/package.json', templateContext);
 		this.fs.copyTpl(sourceRoot + '/README.md', destRoot + '/README.md', templateContext);
-		this.directory(sourceRoot + '/build', destRoot + '/build');
+		this.directory(sourceRoot + '/src', destRoot + '/src');
 		this.directory(sourceRoot + '/funcs', destRoot + '/funcs');
 	},
 	install: function() {
 		this.npmInstall();
-		this.spawnCommand('bundle', ['install']);
 	}
 });
